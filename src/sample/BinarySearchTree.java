@@ -1,8 +1,10 @@
 package sample;
 
 
+import java.io.PrintWriter;
+
 /**
- * Created by Adimus on 04.06.2017.
+ * Created by Michał Treter on 04.06.2017.
  */
 public class BinarySearchTree<T extends Comparable<T>> {
     public Node<T> root = null;
@@ -16,10 +18,6 @@ public class BinarySearchTree<T extends Comparable<T>> {
             root = new Node<T>(v);
         }
         else{
-            //Node<T> tempRoot;
-            //tempRoot = root.add(root, v);
-            //root = tempRoot;
-
             root = root.add(root, v);
         }
     }
@@ -30,9 +28,18 @@ public class BinarySearchTree<T extends Comparable<T>> {
         }
     }
 
-    public void draw(){
-        root.drawTree(root, 0);
-        System.out.println();
+    /**
+     * Method wchic initializes printing the tree
+     * @param output output stream for printing
+     */
+    public void draw(PrintWriter output){
+        if(root != null) {
+            root.drawTree(root, 0, output);
+            output.println();
+        }
+        else {
+            output.println("Wyczyszczone");
+        }
     }
 
     public boolean search(T v){

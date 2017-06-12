@@ -1,7 +1,9 @@
 package sample;
 
+import java.io.PrintWriter;
+
 /**
- * Created by Adimus on 04.06.2017.
+ * Created by Michał Treter on 04.06.2017.
  */
 public class Node<T extends Comparable<T>> {
     public Node<T> left = null;
@@ -91,18 +93,24 @@ public class Node<T extends Comparable<T>> {
         return false;
     }
 
-    public void drawTree(Node<T> root, int level){
+    /**
+     * Method which draws graphical representation of tree
+     * @param root Current node of tree, something like root of smaller tree
+     * @param level Level of tree that we currently on
+     * @param output Path where our output will go
+     */
+    public void drawTree(Node<T> root, int level, PrintWriter output){
         if(root==null)
             return;
-        drawTree(root.right, level+1);
+        drawTree(root.right, level+1, output);
         if(level!=0){
             for(int i=0;i<level-1;i++)
-                System.out.print("|\t");
-            System.out.println("|-------"+root.value);
+                output.print("|\t");
+            output.print("|-------"+root.value + "_");
         }
         else
-            System.out.println(root.value);
-        drawTree(root.left, level+1);
+            output.print(root.value + "_");
+        drawTree(root.left, level+1, output);
     }
 
 }
